@@ -7,7 +7,10 @@ function Calendario(props) {
         return (
             // cuando se establece a true, bottomDivider añade linea de separación al final del componente
             // ListItem requiere de key
-            <ListItem key={index} bottomDivider>
+            <ListItem
+                key={index}
+                onPress={() => props.onPress(item.id)}
+                bottomDivider>
                 <Avatar source={require('./imagenes/40Años.png')} />
                 <ListItem.Content>
                     <ListItem.Title>{item.nombre}</ListItem.Title>
