@@ -1,53 +1,63 @@
-import React, { Component } from 'react';
-import { Text, ScrollView, View } from 'react-native';
+import React from 'react';
+import { Text, ScrollView, View, StyleSheet, Image } from 'react-native';
 import { Card } from '@rneui/themed';
 import { EXCURSIONES } from '../comun/excursiones';
 import { CABECERAS } from '../comun/cabeceras';
 import { ACTIVIDADES } from '../comun/actividades';
 
 function RenderItem(props) {
+    const item = props.item;
     
-        const item = props.item;
-        
-        if (item != null) {
-            return(
-                <Card>
-                    <Card.Title>{item.nombre}</Card.Title>
-                    <Card.Divider/>
-                    <Card.Image source={require('./imagenes/40Años.png')}></Card.Image>
-                    <Text style={{margin: 20}}>
-                        {item.descripcion}
-                    </Text>
-                </Card>
-            );
-        }
-        else {
-            return(<View></View>);
-        }
-}
-
-class Home extends Component {
-
-    constructor(props) {
-        super(props);
-        this.state = {
-          excursiones: EXCURSIONES,
-          cabeceras: CABECERAS,
-          actividades: ACTIVIDADES
-        };
-    }
-
-    render() {
-        
-        return(
-            // permite desplazar contenido que es demasiado grande para caber en la pantalla.
-            <ScrollView>
-                <RenderItem item={this.state.cabeceras.filter((cabecera) => cabecera.destacado)[0]} />
-                <RenderItem item={this.state.excursiones.filter((excursion) => excursion.destacado)[0]} />
-                <RenderItem item={this.state.actividades.filter((actividad) => actividad.destacado)[0]} />
-            </ScrollView>
+    if (item != null) {
+        return (
+            <Card>
+                <Card.Divider />
+                <View>
+                    <Text style={styles.title}>{item.nombre}</Text>
+                    <Image source={require('./imagenes/40Años.png')} style={styles.image} />
+                </View>
+                <Text style={styles.description}>
+                    {item.descripcion}
+                </Text>
+            </Card>
         );
+    } else {
+        return (<View></View>);
     }
 }
+
+const Home = () => {
+    return (
+        <ScrollView>
+            <RenderItem item={CABECERAS.find(cabecera => cabecera.destacado)} />
+            <RenderItem item={EXCURSIONES.find(excursion => excursion.destacado)} />
+            <RenderItem item={ACTIVIDADES.find(actividad => actividad.destacado)} />
+        </ScrollView>
+    );
+};
+
+const styles = StyleSheet.create({
+    
+    title: {
+         position: 'absolute',
+        top: 10,
+        left: 0,
+        right: 0,
+        textAlign: 'center',
+        zIndex: 1,
+        color: 'chocolate',
+        fontWeight: 'bold',
+        fontSize: 36,
+        padding: 10,
+    },
+    image: {
+        width: '100%',
+        height: 200,
+       
+    },
+    description: {
+        margin: 20,
+    },
+});
 
 export default Home;

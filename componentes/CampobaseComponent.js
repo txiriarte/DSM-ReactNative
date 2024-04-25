@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import Constants from 'expo-constants';
 import Calendario from './CalendarioComponent';
 import DetalleExcursion from './DetalleExcursionComponent';
 import { View, Platform } from 'react-native';
@@ -7,6 +6,8 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { createDrawerNavigator } from '@react-navigation/drawer';
 import Home from './HomeComponent';
+import Contacto from './ContactoComponent';
+import QuienesSomos from './QuienesSomosComponent';
 
 const Stack = createNativeStackNavigator();
 // createNativeStackNavigator para crear un Stack Navigator llamado Stack. 
@@ -47,7 +48,9 @@ function DrawerNavegador() {
       }}
     >
       <Drawer.Screen name="Campo base" component={HomeNavegador} />
+      <Drawer.Screen name="Quiénes somos" component={QuienesNavegador} />
       <Drawer.Screen name="Calendario" component={CalendarioNavegador} />
+      <Drawer.Screen name="Contacto" component={ContactoNavegador} />
     </Drawer.Navigator>
   );
 }
@@ -80,6 +83,54 @@ function CalendarioNavegador() {
       />
     </Stack.Navigator>
   );
+}
+
+function ContactoNavegador() {
+  return (
+    <Stack.Navigator
+      initialRouteName="Contacto"
+      screenOptions={{
+        headerMode: 'screen',
+        headerTintColor: '#fff',
+        headerStyle: { backgroundColor: '#015afc' },
+        headerTitleStyle: { color: '#fff' },
+        // headerTitleAlign: 'center', // Alinea el título al centro
+      }}
+    >
+      <Stack.Screen
+        name="Contacto"
+        component={Contacto}
+        options={{
+          title: 'Contacto',
+        }}
+      />
+    </Stack.Navigator>
+  );
+
+}
+
+function QuienesNavegador() {
+  return (
+    <Stack.Navigator
+      initialRouteName="QuienesSomos"
+      screenOptions={{
+        headerMode: 'screen',
+        headerTintColor: '#fff',
+        headerStyle: { backgroundColor: '#015afc' },
+        headerTitleStyle: { color: '#fff' },
+        // headerTitleAlign: 'center', // Alinea el título al centro
+      }}
+    >
+      <Stack.Screen
+        name="QuienesSomos"
+        component={QuienesSomos}
+        options={{
+          title: 'Quiénes Somos',
+        }}
+      />
+    </Stack.Navigator>
+  );
+
 }
 
 class Campobase extends Component {

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Text, View } from 'react-native';
+import { Text, View, StyleSheet, Image } from 'react-native';
 import { Card } from '@rneui/themed';
 import { EXCURSIONES } from '../comun/excursiones';
 
@@ -10,10 +10,12 @@ function RenderExcursion(props) {
         if (excursion != null) {
             return(
             <Card>
-              <Card.Title>{excursion.nombre}</Card.Title>
               <Card.Divider/>
-              <Card.Image source={require('./imagenes/40Años.png')}></Card.Image>
-              <Text style={{margin: 20}}>
+              <View>
+                <Text style={styles.title}>{excursion.nombre}</Text>
+                <Image source={require('./imagenes/40Años.png')} style={styles.image} />
+              </View>
+              <Text style={styles.description}>
                 {excursion.descripcion}
               </Text>
             </Card>
@@ -37,5 +39,29 @@ class DetalleExcursion extends Component {
             return(<RenderExcursion excursion={this.state.excursiones[+excursionId]} />); // + -> conversion a numero
         }
 }
+
+const styles = StyleSheet.create({
+    
+    title: {
+         position: 'absolute',
+        top: 10,
+        left: 0,
+        right: 0,
+        textAlign: 'center',
+        zIndex: 1,
+        color: 'chocolate',
+        fontWeight: 'bold',
+        fontSize: 36,
+        padding: 10,
+    },
+    image: {
+        width: '100%',
+        height: 200,
+       
+    },
+    description: {
+        margin: 20,
+    },
+});
 
 export default DetalleExcursion;
