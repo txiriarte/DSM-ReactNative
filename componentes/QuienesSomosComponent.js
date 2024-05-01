@@ -6,8 +6,6 @@ import { ACTIVIDADES } from '../comun/actividades';
 import { ScrollView } from 'react-native-gesture-handler';
 
 
-
-
 function Historia() {
 
     return (
@@ -38,6 +36,7 @@ function Historia() {
 
 }
 
+// se puede mirar meter historia de fichero externo, añadiendolo como actividades
 
 class QuienesSomos extends Component {
 
@@ -49,7 +48,7 @@ class QuienesSomos extends Component {
     }
 
     render() {
-
+        
         const renderCardItem = ({ item }) => {
             return (
                 <ListItem bottomDivider>
@@ -59,8 +58,6 @@ class QuienesSomos extends Component {
                         <ListItem.Subtitle>{item.descripcion}</ListItem.Subtitle>
                     </ListItem.Content>
                 </ListItem>
-
-
             );
 
         }
@@ -85,12 +82,10 @@ class QuienesSomos extends Component {
                             
                         />
 
-
                 </Card>
                 </ScrollView>
 
             </>
-
 
         );
     }
