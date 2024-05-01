@@ -4,6 +4,7 @@ import { Card, ListItem, Avatar } from '@rneui/themed';
 import { Text, FlatList } from 'react-native';
 import { ACTIVIDADES } from '../comun/actividades';
 import { ScrollView } from 'react-native-gesture-handler';
+import { baseUrl } from '../comun/comun';
 
 
 function Historia() {
@@ -52,7 +53,7 @@ class QuienesSomos extends Component {
         const renderCardItem = ({ item }) => {
             return (
                 <ListItem bottomDivider>
-                    <Avatar source={require('./imagenes/40Años.png')} />
+                    <Avatar source={{uri: baseUrl + item.imagen}} />
                     <ListItem.Content>
                         <ListItem.Title>{item.nombre}</ListItem.Title>
                         <ListItem.Subtitle>{item.descripcion}</ListItem.Subtitle>

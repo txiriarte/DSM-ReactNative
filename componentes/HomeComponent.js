@@ -4,6 +4,7 @@ import { Card } from '@rneui/themed';
 import { EXCURSIONES } from '../comun/excursiones';
 import { CABECERAS } from '../comun/cabeceras';
 import { ACTIVIDADES } from '../comun/actividades';
+import { baseUrl } from '../comun/comun';
 
 function RenderItem(props) {
     const item = props.item;
@@ -12,11 +13,11 @@ function RenderItem(props) {
         return (
             <Card>
                 <Card.Divider />
-                <View>
+                <View style={styles.textContainer}>
                     <Text style={styles.title}>{item.nombre}</Text>
-                    <Image source={require('./imagenes/40Años.png')} style={styles.image} />
                 </View>
-                <Text style={styles.description}>
+                <Card.Image source={{uri: baseUrl + item.imagen}}/>
+                <Text style={{ margin: 20 }}>
                     {item.descripcion}
                 </Text>
             </Card>
@@ -39,25 +40,21 @@ const Home = () => {
 const styles = StyleSheet.create({
     
     title: {
-         position: 'absolute',
-        top: 10,
+        color: 'chocolate',
+        fontSize: 35,
+        fontWeight: 'bold',
+        textAlign: 'center',
+        padding: 5,
+        zIndex: 1, // Asegura que el texto esté sobre la imagen
+    },
+    textContainer: {
+        position: 'absolute', //position: 'absolute', lo que permite que el texto se superponga sobre la imagen. The element is removed from the normal document flow, and no space is created for the element in the page layout. The element is positioned relative to its closest positioned ancestor (if any) or to the initial containing block.
+        top: 20,
         left: 0,
         right: 0,
-        textAlign: 'center',
-        zIndex: 1,
-        color: 'chocolate',
-        fontWeight: 'bold',
-        fontSize: 36,
-        padding: 10,
-    },
-    image: {
-        width: '100%',
-        height: 200,
-       
-    },
-    description: {
-        margin: 20,
-    },
+        bottom: 0,
+        alignItems: 'center', // Centra horizontalmente
+    }
 });
 
 export default Home;

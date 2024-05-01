@@ -4,6 +4,7 @@ import { Card, Icon } from '@rneui/themed';
 import { EXCURSIONES } from '../comun/excursiones';
 import { COMENTARIOS } from '../comun/comentarios';
 import { ListItem } from '@rneui/base';
+import { baseUrl } from '../comun/comun';
 
 function RenderExcursion(props) {
 
@@ -16,7 +17,7 @@ function RenderExcursion(props) {
                 <View style={styles.textContainer}>
                     <Text style={styles.title}>{excursion.nombre}</Text>
                 </View>
-                <Card.Image source={require('./imagenes/40Años.png')} />
+                <Card.Image source={{uri: baseUrl + excursion.imagen}} />
 
                 <Text  style={{ margin:20 }}>
                     {excursion.descripcion}
@@ -116,7 +117,7 @@ class DetalleExcursion extends Component {
 
 const styles = StyleSheet.create({
     title: {
-        color: 'chocolate',
+        color: 'white',
         fontSize: 30,
         fontWeight: 'bold',
         padding: 5,
