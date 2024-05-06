@@ -1,10 +1,19 @@
 import React, { Component } from 'react';
 import { Text, View, StyleSheet, Image, ScrollView, FlatList } from 'react-native';
 import { Card, Icon } from '@rneui/themed';
-import { EXCURSIONES } from '../comun/excursiones';
-import { COMENTARIOS } from '../comun/comentarios';
+// import { EXCURSIONES } from '../comun/excursiones';
+// import { COMENTARIOS } from '../comun/comentarios';
 import { ListItem } from '@rneui/base';
 import { baseUrl } from '../comun/comun';
+import { connect } from 'react-redux';
+
+
+const mapStateToProps = state => {
+    return {
+        excursiones: state.excursiones,
+        comentarios: state.comentarios
+    }
+}
 
 function RenderExcursion(props) {
 
@@ -17,7 +26,7 @@ function RenderExcursion(props) {
                 <View style={styles.textContainer}>
                     <Text style={styles.title}>{excursion.nombre}</Text>
                 </View>
-                <Card.Image source={{uri: baseUrl + excursion.imagen}} />
+                <Card.Image source={{uri: baseUrl + excursion.imagen}} /> 
 
                 <Text  style={{ margin:20 }}>
                     {excursion.descripcion}
@@ -82,8 +91,8 @@ class DetalleExcursion extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            excursiones: EXCURSIONES,
-            comentarios: COMENTARIOS,
+            // excursiones: EXCURSIONES,
+            // comentarios: COMENTARIOS,
             favoritos: []
         };
 
@@ -100,17 +109,18 @@ class DetalleExcursion extends Component {
         return (
             <ScrollView>
                 <RenderExcursion
-                    excursion={this.state.excursiones[+excursionId]} // conversion a numero
+                    //excursion={this.state.excursiones[+excursionId]} // conversion a numero
+                    excursion={this.props.excursiones.excursiones[+excursionId]} // viene de redux
                     favorita={this.state.favoritos.some(el => el === excursionId)} // .some de JS, verifica si algun elto cumple
                     // retorna true si al menos uno cumple la función de callback
                     onPress={() => this.marcarFavorito(excursionId)}
                 />
                 <RenderComentarios
-                    comentarios={this.state.comentarios.filter((comentario) => comentario.excursionId === excursionId)}
+                    //comentarios={this.state.comentarios.filter((comentario) => comentario.excursionId === excursionId)}
+                    comentarios={this.props.comentarios.comentarios.filter((comentario) => comentario.excursionId === excursionId)}
+                    // revisar si es correcto contenido de filter, o si se debieria acceder this.props...
                 />
             </ScrollView>
-
-
         );
     }
 }
@@ -134,4 +144,5 @@ const styles = StyleSheet.create({
 });
 
 
-export default DetalleExcursion;
+// export default DetalleExcursion;
+export default connect(mapStateToProps)(DetalleExcursion);

@@ -1,14 +1,23 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { Text, ScrollView, View, StyleSheet, Image } from 'react-native';
 import { Card } from '@rneui/themed';
-import { EXCURSIONES } from '../comun/excursiones';
-import { CABECERAS } from '../comun/cabeceras';
-import { ACTIVIDADES } from '../comun/actividades';
+//  import { EXCURSIONES } from '../comun/excursiones';
+//  import { CABECERAS } from '../comun/cabeceras';
+//  import { ACTIVIDADES } from '../comun/actividades';
 import { baseUrl } from '../comun/comun';
+import { connect } from 'react-redux';
+
+const mapStateToProps = state => {
+    return {
+        excursiones: state.excursiones,
+        cabeceras: state.cabeceras,
+        actividades: state.actividades
+    }
+}
 
 function RenderItem(props) {
     const item = props.item;
-    
+
     if (item != null) {
         return (
             <Card>
@@ -16,7 +25,7 @@ function RenderItem(props) {
                 <View style={styles.textContainer}>
                     <Text style={styles.title}>{item.nombre}</Text>
                 </View>
-                <Card.Image source={{uri: baseUrl + item.imagen}}/>
+                <Card.Image source={{ uri: baseUrl + item.imagen }} />
                 <Text style={{ margin: 20 }}>
                     {item.descripcion}
                 </Text>
@@ -27,18 +36,41 @@ function RenderItem(props) {
     }
 }
 
-const Home = () => {
-    return (
-        <ScrollView>
-            <RenderItem item={CABECERAS.find(cabecera => cabecera.destacado)} />
-            <RenderItem item={EXCURSIONES.find(excursion => excursion.destacado)} />
-            <RenderItem item={ACTIVIDADES.find(actividad => actividad.destacado)} />
-        </ScrollView>
-    );
-};
+class Home extends Component { // parece que como componente funcional no puede interactactuar con redux correctamente
+    render() {
+
+        return (
+            <ScrollView>
+                {/* <RenderItem item={CABECERAS.find(cabecera => cabecera.destacado)} />
+                <RenderItem item={EXCURSIONES.find(excursion => excursion.destacado)} />
+                <RenderItem item={ACTIVIDADES.find(actividad => actividad.destacado)} /> */}
+                {/* revisar si contenido de find es correcto, o deberia ser this.props... */}
+                <RenderItem item={this.props.cabeceras.cabeceras.find(cabecera=> cabecera.destacado)} />
+                <RenderItem item={this.props.excursiones.excursiones.find(excursiones => excursiones.destacado)} />
+                <RenderItem item={this.props.actividades.actividades.find(actividad => actividad.destacado)} /> 
+            </ScrollView>
+        );
+
+    }
+}
+
+
+// const Home = () => {
+//     return (
+//         <ScrollView>
+//             {/* <RenderItem item={CABECERAS.find(cabecera => cabecera.destacado)} />
+//             <RenderItem item={EXCURSIONES.find(excursion => excursion.destacado)} />
+//             <RenderItem item={ACTIVIDADES.find(actividad => actividad.destacado)} /> */}
+
+//             <RenderItem item={this.props.excursiones.excursiones.find(cabecera => cabecera.destacado)} />
+//             <RenderItem item={EXCURSIONES.find(excursion => excursion.destacado)} />
+//             <RenderItem item={ACTIVIDADES.find(actividad => actividad.destacado)} />
+//         </ScrollView>
+//     );
+// };
 
 const styles = StyleSheet.create({
-    
+
     title: {
         color: 'chocolate',
         fontSize: 35,
@@ -57,4 +89,6 @@ const styles = StyleSheet.create({
     }
 });
 
-export default Home;
+//export default Home;
+export default connect(mapStateToProps)(Home);
+

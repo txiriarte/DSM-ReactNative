@@ -2,9 +2,7 @@ import { Component } from 'react';
 import { Card } from '@rneui/themed';
 import { Text } from 'react-native';
 
-
 function RenderContacto() {
-
 
     return (
 
@@ -31,14 +29,9 @@ function RenderContacto() {
                 Email: gaztaroa@gaztaroa.com
             </Text>
 
-
         </Card>
 
     );
-
-
-
-
 }
 
 class Contacto extends Component {

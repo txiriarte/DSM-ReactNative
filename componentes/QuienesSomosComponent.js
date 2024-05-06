@@ -2,10 +2,16 @@
 import { Component } from 'react';
 import { Card, ListItem, Avatar } from '@rneui/themed';
 import { Text, FlatList } from 'react-native';
-import { ACTIVIDADES } from '../comun/actividades';
+// import { ACTIVIDADES } from '../comun/actividades';
 import { ScrollView } from 'react-native-gesture-handler';
 import { baseUrl } from '../comun/comun';
+import { connect } from 'react-redux';
 
+const mapStateToProps = state => {
+    return {
+        actividades: state.actividades
+    }
+}
 
 function Historia() {
 
@@ -41,19 +47,19 @@ function Historia() {
 
 class QuienesSomos extends Component {
 
-    constructor(props) {
-        super(props);
-        this.state = {
-            actividades: ACTIVIDADES
-        };
-    }
+    // constructor(props) {
+    //     super(props);
+    //     this.state = {
+    //         actividades: ACTIVIDADES
+    //     };
+    // }
 
     render() {
-        
+
         const renderCardItem = ({ item }) => {
             return (
                 <ListItem bottomDivider>
-                    <Avatar source={{uri: baseUrl + item.imagen}} />
+                    <Avatar source={{ uri: baseUrl + item.imagen }} />
                     <ListItem.Content>
                         <ListItem.Title>{item.nombre}</ListItem.Title>
                         <ListItem.Subtitle>{item.descripcion}</ListItem.Subtitle>
@@ -68,22 +74,26 @@ class QuienesSomos extends Component {
 
                 <Historia />
                 {/* si no se pone scrollview no se ve la lista completa */}
-                <ScrollView> 
+                <ScrollView>
 
-                <Card>
-                    <Card.Title>Actividades y recursos</Card.Title>
-                    <Card.Divider />
+                    <Card>
+                        <Card.Title>Actividades y recursos</Card.Title>
+                        <Card.Divider />
 
                         <FlatList scrollEnabled={false}
                             //ListHeaderComponent={() => null} // Para evitar que se renderice el header predeterminado de FlatList
                             //ListFooterComponent={() => null} // Para evitar que se renderice el footer predeterminado de FlatList
-                            data={this.state.actividades}
+                            // data={this.state.actividades}
+                            data={this.props.actividades.actividades}
                             renderItem={renderCardItem}
                             keyExtractor={item => item.id.toString()}
-                            
-                        />
 
-                </Card>
+
+                        />
+                                                    {console.log(this.props.actividades.actividades)}
+
+
+                    </Card>
                 </ScrollView>
 
             </>
@@ -92,4 +102,5 @@ class QuienesSomos extends Component {
     }
 }
 
-export default QuienesSomos;
+// export default QuienesSomos;
+export default connect(mapStateToProps)(QuienesSomos);
