@@ -69,36 +69,59 @@ class QuienesSomos extends Component {
 
         }
 
-        return (
-            <>
-
-                <Historia />
-                {/* si no se pone scrollview no se ve la lista completa */}
+        if (this.props.actividades.isLoading) {
+            return (
                 <ScrollView>
-
+                    <Historia />
                     <Card>
-                        <Card.Title>Actividades y recursos</Card.Title>
+                        <Card.Title>"Actividades y recursos"</Card.Title>
                         <Card.Divider />
-
-                        <FlatList scrollEnabled={false}
-                            //ListHeaderComponent={() => null} // Para evitar que se renderice el header predeterminado de FlatList
-                            //ListFooterComponent={() => null} // Para evitar que se renderice el footer predeterminado de FlatList
-                            // data={this.state.actividades}
-                            data={this.props.actividades.actividades}
-                            renderItem={renderCardItem}
-                            keyExtractor={item => item.id.toString()}
-
-
-                        />
-                                                    {console.log(this.props.actividades.actividades)}
-
-
+                        <IndicadorActividad />
                     </Card>
                 </ScrollView>
+            );
+        }
 
-            </>
+        else if (this.props.actividades.errMess) {
+            return (
+                <View>
+                    <Text>{props.errMess}</Text>
+                </View>
+            );
+        }
 
-        );
+        else {
+
+            return (
+                <>
+
+                    <Historia />
+                    {/* si no se pone scrollview no se ve la lista completa */}
+                    <ScrollView>
+
+                        <Card>
+                            <Card.Title>Actividades y recursos</Card.Title>
+                            <Card.Divider />
+
+                            <FlatList scrollEnabled={false}
+                                //ListHeaderComponent={() => null} // Para evitar que se renderice el header predeterminado de FlatList
+                                //ListFooterComponent={() => null} // Para evitar que se renderice el footer predeterminado de FlatList
+                                // data={this.state.actividades}
+                                data={this.props.actividades.actividades}
+                                renderItem={renderCardItem}
+                                keyExtractor={item => item.id.toString()}
+
+                            />
+
+                        </Card>
+                    </ScrollView>
+
+                </>
+
+            );
+
+        }
+
     }
 }
 

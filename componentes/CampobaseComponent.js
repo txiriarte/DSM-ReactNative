@@ -25,7 +25,7 @@ const mapStateToProps = state => { // mapea estado de Redux a las props del comp
   }
 }
 // mape acciones de Redux a las props del componente
-const mapDispatchToProps = dispatch => ({ // dispatch nombre de convenio
+const mapDispatchToProps = dispatch => ({ // dispatch nombre de convenio, definida al hacer connect 'react-redux'
   fetchExcursiones: () => dispatch(fetchExcursiones()),
   fetchComentarios: () => dispatch(fetchComentarios()),
   fetchCabeceras: () => dispatch(fetchCabeceras()),

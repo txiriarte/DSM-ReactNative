@@ -6,14 +6,22 @@ import { Card, Icon } from '@rneui/themed';
 import { ListItem } from '@rneui/base';
 import { baseUrl } from '../comun/comun';
 import { connect } from 'react-redux';
+import { postFavorito } from '../redux/ActionCreators';
+
 
 
 const mapStateToProps = state => {
     return {
         excursiones: state.excursiones,
-        comentarios: state.comentarios
+        comentarios: state.comentarios,
+        favoritos: state.favoritos
     }
 }
+
+const mapDispatchToProps = dispatch => ({
+    postFavorito: (excursionId) => dispatch(postFavorito(excursionId))
+    })
+
 
 function RenderExcursion(props) {
 
@@ -88,18 +96,19 @@ function RenderComentarios(props) {
 
 
 class DetalleExcursion extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            // excursiones: EXCURSIONES,
-            // comentarios: COMENTARIOS,
-            favoritos: []
-        };
+    // constructor(props) {
+    //     super(props);
+    //     this.state = {
+    //         // excursiones: EXCURSIONES,
+    //         // comentarios: COMENTARIOS,
+    //         favoritos: []
+    //     };
 
-    }
+    // }
 
     marcarFavorito(excursionId) {
-        this.setState({ favoritos: this.state.favoritos.concat(excursionId) });
+        // this.setState({ favoritos: this.state.favoritos.concat(excursionId) });
+        this.props.postFavorito(excursionId);
 
     }
 
@@ -111,10 +120,13 @@ class DetalleExcursion extends Component {
                 <RenderExcursion
                     //excursion={this.state.excursiones[+excursionId]} // conversion a numero
                     excursion={this.props.excursiones.excursiones[+excursionId]} // viene de redux
-                    favorita={this.state.favoritos.some(el => el === excursionId)} // .some de JS, verifica si algun elto cumple
+                    //favorita={this.state.favoritos.some(el => el === excursionId)} // .some de JS, verifica si algun elto cumple
                     // retorna true si al menos uno cumple la función de callback
+                    favorita={this.props.favoritos.favoritos.some(el => el === excursionId)} // .some de JS, verifica si algun elto cumple
                     onPress={() => this.marcarFavorito(excursionId)}
                 />
+
+
                 <RenderComentarios
                     //comentarios={this.state.comentarios.filter((comentario) => comentario.excursionId === excursionId)}
                     comentarios={this.props.comentarios.comentarios.filter((comentario) => comentario.excursionId === excursionId)}
@@ -145,4 +157,4 @@ const styles = StyleSheet.create({
 
 
 // export default DetalleExcursion;
-export default connect(mapStateToProps)(DetalleExcursion);
+export default connect(mapStateToProps, mapDispatchToProps)(DetalleExcursion);
