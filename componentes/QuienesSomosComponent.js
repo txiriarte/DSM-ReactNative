@@ -54,6 +54,8 @@ class QuienesSomos extends Component {
     //     };
     // }
 
+    //ahora de redux
+
     render() {
 
         const renderCardItem = ({ item }) => {

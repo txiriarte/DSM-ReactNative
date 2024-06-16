@@ -2,7 +2,7 @@
 import React, { Component } from 'react';
 import { Text, ScrollView, View, StyleSheet, Image } from 'react-native';
 import { Card } from '@rneui/themed';
-//  import { EXCURSIONES } from '../comun/excursiones';
+//  import { EXCURSIONES } from '../comun/excursiones'; ahora redux
 //  import { CABECERAS } from '../comun/cabeceras';
 //  import { ACTIVIDADES } from '../comun/actividades';
 import { baseUrl } from '../comun/comun';
@@ -90,7 +90,6 @@ class Home extends Component { // parece que como componente funcional no puede 
 
     }
 }
-
 
 // const Home = () => {
 //     return (

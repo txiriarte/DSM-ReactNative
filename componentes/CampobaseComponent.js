@@ -32,6 +32,10 @@ const mapDispatchToProps = dispatch => ({ // dispatch nombre de convenio, defini
   fetchActividades: () => dispatch(fetchActividades()),
 })
 
+// mapDispatchToProps: Esta función toma la función dispatch de Redux como argumento y devuelve un objeto que vincula las acciones
+//  de Redux a funciones que serán accesibles en el componente. De esta manera, el componente puede despachar acciones simplemente 
+//  llamando a estas funciones, lo que desencadena las actualizaciones correspondientes en el estado de Redux.
+
 const Stack = createNativeStackNavigator();
 // createNativeStackNavigator para crear un Stack Navigator llamado Stack. 
 // Este Navigator gestionará la navegación entre las pantallas de la aplicación.
@@ -160,7 +164,7 @@ function CalendarioNavegador({ navigation }) {
   return (
     //estilo encabezado, opciones de navegacion
     <Stack.Navigator
-      initialRouteName="Calendario"
+      initialRouteName="Calendar"
       headerMode="float" // flotan sobre el contenido de la pantalla
       screenOptions={{
         headerTintColor: '#fff', // color del texto del encabezado
@@ -170,7 +174,7 @@ function CalendarioNavegador({ navigation }) {
       }}
     >
       <Stack.Screen // pantalla navegacion
-        name="Calendario"
+        name="Calendar"
         component={Calendario}
         options={{
           title: 'Calendario Gaztaroa',
@@ -193,7 +197,7 @@ function CalendarioNavegador({ navigation }) {
 function ContactoNavegador({ navigation }) {
   return (
     <Stack.Navigator
-      initialRouteName="Contacto"
+      initialRouteName="Contact"
       screenOptions={{
         headerMode: 'screen',
         headerTintColor: '#fff',
@@ -205,7 +209,7 @@ function ContactoNavegador({ navigation }) {
       }}
     >
       <Stack.Screen
-        name="Contacto"
+        name="Contact"
         component={Contacto}
         options={{
           title: 'Contacto',
